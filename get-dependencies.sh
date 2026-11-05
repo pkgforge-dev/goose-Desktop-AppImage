@@ -29,7 +29,7 @@ echo "$version" > ~/version
 
 echo "Preparing AppDir..."
 mkdir -p ./AppDir/
-bsdtar -xOf /tmp/temp.deb data.tar.xz | bsdtar -xf - --strip-components=2 -C ./AppDir/
+bsdtar -xOf /tmp/temp.deb data.tar.zst | bsdtar -xf - --strip-components=2 -C ./AppDir/
 
 mv -f ./AppDir/lib/goose/* ./AppDir/bin/
 rm -rf ./AppDir/lib
