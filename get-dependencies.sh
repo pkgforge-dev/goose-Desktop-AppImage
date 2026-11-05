@@ -35,4 +35,3 @@ mv -f ./AppDir/lib/goose/* ./AppDir/bin/
 rm -rf ./AppDir/lib
 
 rm -f ./AppDir/bin/goose
-mv -f ./AppDir/bin/Goose ./AppDir/bin/goose
