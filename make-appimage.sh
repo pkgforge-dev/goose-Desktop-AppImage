@@ -7,9 +7,9 @@ export ARCH
 export OUTPATH=./dist
 export ADD_HOOKS="self-updater.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
-export ICON=PATH_OR_URL_TO_ICON
-export DESKTOP=PATH_OR_URL_TO_DESKTOP_ENTRY
+export ICON=./AppDir/share/pixmaps/goose.png
+export DESKTOP=./AppDir/share/applications/goose.desktop
 
-quick-sharun /PATH/TO/BINARY_AND_LIBRARIES_HERE
+quick-sharun ./AppDir/bin/* /usr/lib/libnss_nis.so* /usr/lib/libnsl.so* /usr/lib/libnss_mdns*_minimal.so*
 quick-sharun --make-appimage
 quick-sharun --test ./dist/*.AppImage

@@ -6,24 +6,30 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-# pacman -Syu --noconfirm PACKAGESHERE
+pacman -Syu --noconfirm patchelf libnss_nis nss-mdns nss #jq
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano
 
-# Comment this out if you need an AUR package
-#make-aur-package PACKAGENAME
+echo "Getting binary..."
+echo "---------------------------------------------------------------"
 
-# If the application needs to be manually built that has to be done down here
+case "$ARCH" in
+	x86_64)  farch=amd64;;
+	aarch64) farch=arm64;;
+esac
 
-# if you also have to make nightly releases check for DEVEL_RELEASE = 1
-#
-# if [ "${DEVEL_RELEASE-}" = 1 ]; then
-# 	nightly build steps
-# else
-# 	regular build steps
-# fi
+release=$(curl -fsSL https://api.github.com/repos/aaif-goose/goose/releases/latest)
+version=$(echo $release | jq -r '.tag_name | ltrimstr("v")')
+link=$(echo $release | jq -r --arg name "goose_${version}_${farch}-vulkan.deb" '.assets[] | select(.name == $name) | .browser_download_url')
 
-# Note that when building manually, you want to output the version of the
-# application to a ~/version file and remove VERSION from make-appimage.sh
+curl -sSfL --retry 30 --retry-connrefused "$link" -o /tmp/temp.deb
+echo "$version" > ~/version
+
+echo "Preparing AppDir..."
+mkdir -p ./AppDir/
+bsdtar -xOf /tmp/temp.deb data.tar.xz | bsdtar -xf - --strip-components=2 -C ./AppDir/
+
+mv -f ./AppDir/lib/goose/* ./AppDir/bin/
+rm -rf ./AppDir/lib
