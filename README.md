@@ -7,7 +7,7 @@
 [![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/goose-Desktop-AppImage)](https://github.com/pkgforge-dev/goose-Desktop-AppImage/releases/latest)
 
 <p align="center">
-  <img src="https://goose-docs.ai/img/goose-logo-black.png" width="128" />
+  <img src="https://goose-docs.ai/img/goose-logo-white.png" width="128" />
 </p>
 
 
