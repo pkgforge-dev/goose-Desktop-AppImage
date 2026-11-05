@@ -33,3 +33,6 @@ bsdtar -xOf /tmp/temp.deb data.tar.zst | bsdtar -xf - --strip-components=2 -C ./
 
 mv -f ./AppDir/lib/goose/* ./AppDir/bin/
 rm -rf ./AppDir/lib
+
+rm -f ./AppDir/bin/goose
+mv -f ./AppDir/bin/Goose ./AppDir/bin/goose

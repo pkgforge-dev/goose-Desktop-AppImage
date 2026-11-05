@@ -10,7 +10,6 @@ export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}
 
 export ICON=./AppDir/share/pixmaps/goose.png
 export DESKTOP=./AppDir/share/applications/goose.desktop
-export MAIN_BIN=./AppDir/bin/Goose
 
 quick-sharun ./AppDir/bin/* /usr/lib/libnss_nis.so* /usr/lib/libnsl.so* /usr/lib/libnss_mdns*_minimal.so*
 quick-sharun --make-appimage
